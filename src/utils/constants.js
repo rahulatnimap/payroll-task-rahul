@@ -1,0 +1,13 @@
+const routes = {
+    privateRoutes : [
+        { 
+
+        }
+    ],
+    publcRoutes : [
+        {
+            
+        }
+    ]
+
+}

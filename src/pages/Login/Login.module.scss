@@ -1,0 +1,22 @@
+.mainContainer {
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+    display: flex;
+
+    .leftContainer {
+        background-image: url("../../assets/JPEG/login-page-slider1.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        width: 50%;
+        height: 100%;
+    }
+
+    .rightContainer {
+        width: 50%;
+        height: 100%;
+
+    }
+}
