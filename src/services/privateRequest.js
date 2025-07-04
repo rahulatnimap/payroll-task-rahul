@@ -1,7 +1,7 @@
 import axios from "axios"
 import { getToken } from "../utils/utils";
 const PrivateRequest = axios.create({
-    baseURL: import.meta.env.VITE_API_BASE_URL,
+    baseURL: "https://testffc.nimapinfotech.com", //import.meta.env.VITE_API_BASE_URL,
     timeout: 20000,
 })
 
