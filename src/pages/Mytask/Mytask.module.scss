@@ -1,0 +1,28 @@
+.TaskContainer{
+    background-color: #ffffff;
+    display: flex;
+    gap: 30px;
+    padding: 1rem;
+    flex-direction: column;
+    height: 100vh;
+.taskTopBar{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+        align-items: center;
+    padding: 0rem 2rem;
+     Button{
+            height: fit-content;
+        }
+    
+    .taskbarRight{
+        display: flex;
+        gap: 2rem;
+        align-items: center;
+        Button{
+            height: fit-content;
+        }
+    }
+}   
+
+}

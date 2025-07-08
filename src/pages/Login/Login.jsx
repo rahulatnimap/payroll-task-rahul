@@ -7,26 +7,40 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { useForm } from "react-hook-form"
 import axios from "axios";
 import { LOGIN } from "../../services/endPoints";
-import { post } from "../../services/publicRequest";
+import { PublicPost } from "../../services/publicRequest";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 const Login = () => {
   const [show, setShow] = React.useState(false)
-  const { handleSubmit , register , formState:{errors} } = useForm()
+  const { handleSubmit, register, formState: { errors }, reset } = useForm();
+  const navigate = useNavigate()
 
-  const onSubmitLogin = async(data) => {
+  const onSubmitLogin = async (data) => {
     const payload = {
-      username : data.username,
-      password : data.password
+      Username: data.username,
+      Password: data.password
     }
-try {
-    const res = await post(LOGIN,payload)
-    console.log("Success")
-} catch (error) {
-   console.log('error', error)
-}
-
-
-
-    // console.log('data', data , errors)
+    try {
+      const res = await PublicPost(LOGIN, payload)
+      if (res.data.success) {
+        const combined = `${data.username}:${data.password}`;
+        const base64Encoded = btoa(combined);
+        localStorage.setItem("token", base64Encoded);
+        const userDetail = res.data?.userDetail?.data;
+        localStorage.setItem("userId", userDetail?.UserId);
+        localStorage.setItem("userName", userDetail?.Name);
+        localStorage.setItem("userEmail", userDetail?.Email);
+        localStorage.setItem("userImage", userDetail?.UserImage);
+        toast.success("LoggedIn successfully");
+        navigate("/mytask");
+      }
+      else {
+        toast.error(res.data.errormessage);
+      }
+      reset()
+    } catch (error) {
+      console.log('error', error)
+    }
   }
 
   return (
@@ -38,20 +52,20 @@ try {
       <div className={Style.bottomContainer}>
         <form onSubmit={handleSubmit(onSubmitLogin)} action="">
           <TextField
-          {...register("username" , { required: "Username is required" })}
+            {...register("username", { required: "Username is required" })}
             sx={{ width: "100%" }}
             label="username"
             variant="standard"
             helperText={errors.username ? errors.username.message : " "}
-              error={!!errors.username}
+            error={!!errors.username}
           />
           <TextField
-          {...register("password", { required: "Password is required" })}
+            {...register("password", { required: "Password is required" })}
             type={!show ? "password" : "text"}
             sx={{ width: "100%" }}
             label="Password"
             variant="standard"
-              error={!!errors.password}
+            error={!!errors.password}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">

@@ -4,6 +4,10 @@ export const getToken = () => {
   return localStorage.getItem("token");
 };
 
+export const combineClasses = (...classes) => {
+  return classes.join(" ");
+};
+
 export const getUserName = () => {
   return localStorage.getItem("userName");
 };
