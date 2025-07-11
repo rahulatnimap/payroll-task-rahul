@@ -4,6 +4,8 @@
     import PublicRoutes from "./src/routes/PublicRoutes.jsx"
     import PrivateRoutes from "./src/routes/PrivateRoutes.jsx"
     import MyTask from "./src/pages/Mytask/MyTask.jsx"
+import { AllRoute } from "./src/utils/constants.js"
+import Dashboard from "./src/pages/Dashboard.jsx"
     const LazyLogin = React.lazy(() => import('./src/pages/Login/Login.jsx'))
     const LazyPostLogin = React.lazy(() => import('./src/layout/postLogin/PostLogin.jsx'))
 
@@ -24,10 +26,14 @@
         {
             element: <PrivateRoutes component={<LazyPostLogin/>}></PrivateRoutes>,
             children: [
+            ...Object.values(AllRoute.privateRoutes).map(Pages => ({
+                    path : Pages?.path,
+                    element:<Pages.element/>
+            })),
             {
-                path : "/mytask",
-                element: <MyTask/>
-            },
+                path: '/',
+                element:<Dashboard/>
+            }
             ]
         }
     ])

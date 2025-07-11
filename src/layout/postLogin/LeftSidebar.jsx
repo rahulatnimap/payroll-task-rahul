@@ -2,9 +2,10 @@
   import { combineClasses } from '../../utils/utils'
   import styles from './PostLogin.module.scss'
   import { useSelector } from 'react-redux'
-  import { NavLink } from 'react-router-dom';
+  import { Navigate, NavLink, useNavigate } from 'react-router-dom';
   import logo from "../../assets/PNG/FFC-logo.png"
   import { sideBarNavigation } from '../../utils/sidebarNavigation';
+import toast from 'react-hot-toast';
 
   const payrollRoutes = [
     { id: 1, pageName: "Employees", path: "/employees", icon: '' },
@@ -13,10 +14,14 @@
   ];
 
   const LeftSidebar = ({ toggleSidebar }) => {
+    console.log('sideBarNavigation', sideBarNavigation)
       const { leftSidebar } = useSelector((state) => state.home)
+      const nav = useNavigate()
 
       const handleLogout = () => {
           localStorage.removeItem("token")
+          toast.success("Logout Sucessfull")
+          setTimeout(()=> nav("/login"),800)  
       }
     return (
       <div

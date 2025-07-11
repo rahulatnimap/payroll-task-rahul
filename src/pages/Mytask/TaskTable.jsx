@@ -17,6 +17,8 @@ import {
 } from "../../redux/slices/taskSlice";
 import { getStatus } from "../../utils/utils";
 import dayjs from "dayjs";
+import ConfirmModal from "../../component/ConfirmModal";
+import PartialCompleteModal from "./PartialCompleteModal";
 // import PartialCompleteModal from "./PartialCompleteModal";
 // import ConfirmModal from "../../components/ConfirmModal";
 
@@ -254,7 +256,7 @@ const TaskTable = ({ search = '' }) => {
           "--DataGrid-overlayHeight": "300px",
         }}
       />
-      {/* <PartialCompleteModal
+      <PartialCompleteModal
         isOpen={isPartialTaskModalOpen}
         handleClose={() => setIsPartialTaskModalOpen(false)}
         taskId={selectedTask}
@@ -268,7 +270,7 @@ const TaskTable = ({ search = '' }) => {
         message="Do you want to delete this Task?"
         confirmText="Delete"
         cancelText="Cancel"
-      /> */}
+      />
     </Paper>
   );
 };

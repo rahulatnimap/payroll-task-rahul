@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 const Login = () => {
   const [show, setShow] = React.useState(false)
-  const { handleSubmit, register, formState: { errors }, reset } = useForm();
+  const { handleSubmit, register, formState: { errors , isSubmitting }, reset } = useForm();
   const navigate = useNavigate()
 
   const onSubmitLogin = async (data) => {
@@ -82,7 +82,7 @@ const Login = () => {
             helperText={errors.password ? errors.password.message : " "}
           />
 
-          <Button type="submit">Submit</Button>
+          <Button disabled={isSubmitting  && true} type="submit">Submit</Button>
         </form>
       </div>
     </div>

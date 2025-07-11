@@ -3,13 +3,26 @@ import styles from './PostLogin.module.scss';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import { sideBarNavigation } from '../../utils/sidebarNavigation';
+import { useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { setLeftSidebar } from '../../redux/slices/homeSlice';
+import { Button } from '@mui/material';
 
 const Topbar = () => {
   const [currentTime, setCurrentTime] = useState('')
+  const [displayPage, setDisplayPage] = useState('')
+  const location = useLocation();
+  const dispatch = useDispatch();
+  const { leftSidebar } = useSelector(state => state.home)
   const DisplayName = () => {
     const Path = window.location.pathname
     const Name = sideBarNavigation.find((e) => e.path === Path)
-    return Name.pageName
+    setDisplayPage(Name.pageName)
+  }
+
+  const handleArrowClick = (e) => {
+        e.stopPropagation();
+        dispatch(setLeftSidebar(!leftSidebar))
   }
 
   const CurrentTime = () => {
@@ -28,11 +41,14 @@ const Topbar = () => {
   useEffect(() => {
     setInterval(() => CurrentTime(), 1000)
   }, [currentTime])
+  useEffect(() => {
+    DisplayName()
+  }, [location])
   return (
     <div className={styles.topBarContainer}>
       <div className={styles.leftSide}>
-        <ArrowBackIosNewIcon className={styles.backIcon} />
-        <span className={styles.pageName}>{DisplayName()}</span>
+         <Button onClick={() => handleArrowClick}><ArrowBackIosNewIcon className={styles.backIcon}  /></Button>
+        <span className={styles.pageName}>{displayPage}</span>
       </div>
 
       <div className={styles.rightSide}>
