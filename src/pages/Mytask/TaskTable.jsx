@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { ButtonGroup, IconButton, Paper } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import {
@@ -19,8 +19,6 @@ import { getStatus } from "../../utils/utils";
 import dayjs from "dayjs";
 import ConfirmModal from "../../component/ConfirmModal";
 import PartialCompleteModal from "./PartialCompleteModal";
-// import PartialCompleteModal from "./PartialCompleteModal";
-// import ConfirmModal from "../../components/ConfirmModal";
 
 const DEFAULT_PAGE_NO = 0;
 const rowsPerPage = [10, 25, 50, 100];
@@ -62,6 +60,7 @@ const TaskTable = ({ search = '' }) => {
   };
 
   const handleUpdateTaskStatus = (TaskId, TaskStatusValue) => {
+    debugger
     dispatch(updateTaskStatus({ TaskId, TaskStatusValue }));
     setSelectedTask(null);
     setIsPartialTaskModalOpen(false);
@@ -157,9 +156,9 @@ const TaskTable = ({ search = '' }) => {
           params.row.CompletionPercentage !== 100;
         return (
           <ButtonGroup variant="outlined">
-            <IconButton>
+            {/* <IconButton>
               <ArchiveOutlined />
-            </IconButton>
+            </IconButton> */}
 
             <IconButton
               color="primary"
@@ -170,9 +169,9 @@ const TaskTable = ({ search = '' }) => {
             >
               <ThumbUpAltOutlined />
             </IconButton>
-            <IconButton color="info">
+            {/* <IconButton color="info">
               <BarChartOutlined />
-            </IconButton>
+            </IconButton> */}
 
             <IconButton
               color="error"

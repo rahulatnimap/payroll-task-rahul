@@ -7,6 +7,7 @@ import Topbar from './Topbar'
 import styles from './postLogin.module.scss'
 import { sideBarNavigation } from '../../utils/sidebarNavigation'
 import { combineClasses } from '../../utils/utils'
+import Loader from '../../component/Loader/Loader'
 
 const PostLogin = () => {
   const { leftSidebar } = useSelector((state) => state.home)
@@ -23,7 +24,7 @@ const PostLogin = () => {
       <div  onMouseOver={toggleSidebar(false)} className={!leftSidebar ? combineClasses(styles.rightSideContainer, styles.sidebarClosed) : styles.rightSideContainer}>
       <Topbar/> 
       <div className={styles.outletDiv}>
-        <Suspense>
+        <Suspense fallback={<Loader/>}>
             <Outlet/>
         </Suspense>
         </div>

@@ -26,6 +26,7 @@ import MembersList from "./MembersList";
 import { useDispatch } from "react-redux";
 import { addTask } from "../../../redux/slices/taskSlice";
 import useLeadMembers from "../../../hooks/useLeaderMembers";
+import style from "../Mytask.module.scss"
 
 const CreateModal = () => {
   const [open, setOpen] = useState(false);
@@ -58,7 +59,6 @@ const CreateModal = () => {
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
-      // Validate file size (2 MB limit)
       if (file.size > 2 * 1024 * 1024) {
         toast.error("File size exceeds 2 MB limit.");
         return;
@@ -71,12 +71,12 @@ const CreateModal = () => {
   const handleRemoveFile = (e) => {
     e.stopPropagation();
     setFileName("");
-    fileAttachmentRef.current.value = ""; // Clear the file input
+    fileAttachmentRef.current.value = "";
   };
 
   const setMembers = (memberIds) => {
     if (usersModal.open) setValue(usersModal.type, memberIds);
-  };
+  }; 
 
   const onSubmit = async (values) => {
     try {
@@ -85,7 +85,7 @@ const CreateModal = () => {
       toast.error(error?.message || "Something went wrong");
     } finally {
       reset();
-      handleCloseModal();
+      handleCloseModal()                                        
     }
   };
   return (
@@ -97,11 +97,12 @@ const CreateModal = () => {
       <Modal open={open} onClose={handleCloseModal}>
         <Box
           component="div"
+          className={style.createTaskBox}
           sx={{
             width: {
-              xs: "90%", // 90% of the parent width on small screens
-              sm: "70%", // 70% of the parent width on small tablets
-              md: "50%", // 50% of the parent width on medium screens (desktops)
+              xs: "90%", 
+              sm: "70%", 
+              md: "50%", 
             },
             margin: "auto",
             boxShadow: 3,
@@ -121,7 +122,6 @@ const CreateModal = () => {
               <Typography sx={{ flexGrow: 1 }}>Add Task</Typography>
             </Toolbar>
           </AppBar>
-
           {/* Tabs for switching between sections */}
           <Tabs
             value={tabIndex}

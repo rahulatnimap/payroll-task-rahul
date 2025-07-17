@@ -14,7 +14,6 @@ import toast from 'react-hot-toast';
   ];
 
   const LeftSidebar = ({ toggleSidebar }) => {
-    console.log('sideBarNavigation', sideBarNavigation)
       const { leftSidebar } = useSelector((state) => state.home)
       const nav = useNavigate()
 

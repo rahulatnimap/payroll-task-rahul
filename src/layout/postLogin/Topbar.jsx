@@ -7,6 +7,7 @@ import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setLeftSidebar } from '../../redux/slices/homeSlice';
 import { Button } from '@mui/material';
+import { getUserName } from '../../utils/utils';
 
 const Topbar = () => {
   const [currentTime, setCurrentTime] = useState('')
@@ -19,12 +20,7 @@ const Topbar = () => {
     const Name = sideBarNavigation.find((e) => e.path === Path)
     setDisplayPage(Name.pageName)
   }
-
-  const handleArrowClick = (e) => {
-        e.stopPropagation();
-        dispatch(setLeftSidebar(!leftSidebar))
-  }
-
+ 
   const CurrentTime = () => {
     const now = new Date();
     const hours = now.getHours().toString().padStart(2, '0');
@@ -47,7 +43,6 @@ const Topbar = () => {
   return (
     <div className={styles.topBarContainer}>
       <div className={styles.leftSide}>
-         <Button onClick={() => handleArrowClick}><ArrowBackIosNewIcon className={styles.backIcon}  /></Button>
         <span className={styles.pageName}>{displayPage}</span>
       </div>
 
@@ -55,9 +50,7 @@ const Topbar = () => {
         <div>
           {currentTime}
         </div>
-        {/* You can add more components like user avatar, language selector etc. */}
-        <NotificationsNoneIcon />
-        <span>John Doe</span>
+        <span>{getUserName()}</span>
       </div>
     </div>
   );

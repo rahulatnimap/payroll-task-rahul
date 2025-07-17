@@ -22,6 +22,17 @@
         Button{
             height: fit-content;
         }
+
+    .creatTaskBox{
+            width: 50%;
+            margin: "auto";
+            box-shadow: 3;
+            height: "80vh";
+            overflow: "hidden";
+            display: "flex";
+            flex-direction: "column";
+            background: "white";
+    }
     }
 }   
 
