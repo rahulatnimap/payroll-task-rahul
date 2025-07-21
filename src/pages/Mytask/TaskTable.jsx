@@ -60,7 +60,6 @@ const TaskTable = ({ search = '' }) => {
   };
 
   const handleUpdateTaskStatus = (TaskId, TaskStatusValue) => {
-    debugger
     dispatch(updateTaskStatus({ TaskId, TaskStatusValue }));
     setSelectedTask(null);
     setIsPartialTaskModalOpen(false);
@@ -92,7 +91,7 @@ const TaskTable = ({ search = '' }) => {
       sortColumn: sortModel.length > 0 ? sortModel[0].field : "",
       sortOrder: sortModel.length > 0 ? sortModel[0].sort : "",
     });
-  }, [dispatch, rowsPerPage, search, sortModel, paginationModel, filterData]);
+  }, [dispatch, rowsPerPage, search, sortModel, filterData]);
 
   const columns = [
     {

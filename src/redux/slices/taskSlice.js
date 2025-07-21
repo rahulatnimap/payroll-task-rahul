@@ -115,6 +115,7 @@ const taskSlice = createSlice({
       .addCase(fetchTasks.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
+        state.tasks = []
       })
       .addCase(addTask.pending, (state) => {
         state.loading = true;

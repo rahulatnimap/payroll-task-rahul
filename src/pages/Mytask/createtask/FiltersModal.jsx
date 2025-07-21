@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   TextField,
@@ -10,19 +10,19 @@ import CustomModal from "../../../component/CustomModal";
 import CustomSelect from "../../../component/CustomSelect";
 import { priorityOptions, statusOptions } from "../../../utils/utils";
 import { Controller, useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setFilterData } from "../../../redux/slices/taskSlice";
 
 const FilterButton = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [membersModalOpen, setMembersModalOpen] = useState(false);
-
+  const { filterData } = useSelector((store) => store?.task )
   const {control, handleSubmit, reset, watch, setValue} = useForm({defaultValues : {
-    TaskStatus: "",
-    Priority: "",
-    UserIds: "",
-    FromDueDate: null,
-    ToDueDate: null,
+    TaskStatus: filterData?.TaskStatus ||  "",
+    Priority: filterData?.Priority ||  "",
+    UserIds: filterData?.UserIds  || "",
+    FromDueDate: filterData?.FromDueDate || null,
+    ToDueDate: filterData?.ToDueDate || null,
   }})
 
   const handleClickOpen = () => {
@@ -42,8 +42,21 @@ const dispatch = useDispatch();
   const onSubmit = (value) => {
       dispatch(setFilterData(value));
       handleClose();
-      reset();
+      reset(value);
   };
+
+  useEffect(() => {
+  if (dialogOpen) {
+    reset({
+      TaskStatus: filterData?.TaskStatus || "",
+      Priority: filterData?.Priority || "",
+      UserIds: filterData?.UserIds || "",
+      FromDueDate: filterData?.FromDueDate || null,
+      ToDueDate: filterData?.ToDueDate || null,
+    });
+  }
+}, [dialogOpen]);
+
 
   return (
     <div >
